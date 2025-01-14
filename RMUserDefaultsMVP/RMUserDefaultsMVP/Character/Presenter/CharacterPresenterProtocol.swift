@@ -11,7 +11,8 @@ import UIKit
 protocol CharacterPresenterProtocol: AnyObject {
     init(view: CharacterViewProtocol,
          networkManager: NetworkManagerProtocol,
-         storageManager: StorageManagerProtocol)
+         storageManager: StorageManagerProtocol
+    )
 
     func viewDidLoad()
 

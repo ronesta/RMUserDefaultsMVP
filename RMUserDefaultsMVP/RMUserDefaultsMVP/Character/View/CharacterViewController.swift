@@ -16,7 +16,7 @@ final class CharacterViewController: UIViewController {
     }()
 
     var presenter: CharacterPresenterProtocol?
-    var tableViewDataSource: UITableViewDataSource?
+    var tableViewDataSource: CharacterDataSourceProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ final class CharacterViewController: UIViewController {
 
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
-        configureTableView(dataSource: tableViewDataSource)
+        tableView.dataSource = tableViewDataSource
     }
 
     private func setupNavigationBar() {
@@ -48,24 +48,13 @@ final class CharacterViewController: UIViewController {
             make.edges.equalToSuperview()
         }
     }
-
-    private func configureTableView(dataSource: UITableViewDataSource?) {
-        guard let tableViewDataSource else {
-            return
-        }
-
-        tableView.dataSource = tableViewDataSource
-    }
 }
 
 // MARK: - CharacterViewProtocol
 extension CharacterViewController: CharacterViewProtocol {
     func updateCharacters(_ characters: [Character]) {
-        guard let dataSource = tableViewDataSource as? CharacterTableViewDataSource else {
-            return
-        }
-        
-        dataSource.characters = characters
+
+        tableViewDataSource?.characters = characters
         tableView.reloadData()
     }
 
@@ -86,5 +75,3 @@ extension CharacterViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
-
-

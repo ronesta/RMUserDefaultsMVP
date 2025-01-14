@@ -50,4 +50,3 @@ final class StorageManager: StorageManagerProtocol {
         UserDefaults.standard.removeObject(forKey: key)
     }
 }
-

@@ -20,4 +20,3 @@ protocol StorageManagerProtocol {
 
     func clearImage(key: String)
 }
-

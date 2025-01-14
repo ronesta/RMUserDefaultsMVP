@@ -17,7 +17,8 @@ final class CharacterPresenter: CharacterPresenterProtocol {
 
     init(view: CharacterViewProtocol,
          networkManager: NetworkManagerProtocol,
-         storageManager: StorageManagerProtocol) {
+         storageManager: StorageManagerProtocol
+    ) {
         self.view = view
         self.networkManager = networkManager
         self.storageManager = storageManager

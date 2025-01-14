@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class CharacterTableViewDataSource: NSObject, UITableViewDataSource {
+final class CharacterTableViewDataSource: NSObject, UITableViewDataSource, CharacterDataSourceProtocol {
     var characters = [Character]()
     var presenter: CharacterPresenterProtocol?
 
@@ -19,7 +19,8 @@ final class CharacterTableViewDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: CharacterTableViewCell.id,
-            for: indexPath) as? CharacterTableViewCell else {
+            for: indexPath
+        ) as? CharacterTableViewCell else {
             return UITableViewCell()
         }
 
@@ -30,6 +31,7 @@ final class CharacterTableViewDataSource: NSObject, UITableViewDataSource {
                 guard let currentCell = tableView.cellForRow(at: indexPath) as? CharacterTableViewCell else {
                     return
                 }
+
                 currentCell.configure(with: character, image: image)
             }
         }

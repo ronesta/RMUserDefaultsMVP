@@ -94,4 +94,3 @@ final class NetworkManager: NetworkManagerProtocol {
         }.resume()
     }
 }
-
