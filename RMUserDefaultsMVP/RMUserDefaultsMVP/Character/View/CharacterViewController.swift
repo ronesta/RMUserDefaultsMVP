@@ -25,11 +25,6 @@ final class CharacterViewController: UIViewController {
         presenter?.viewDidLoad()
     }
 
-    override func viewIsAppearing(_ animated: Bool) {
-        super.viewIsAppearing(animated)
-        tableView.dataSource = tableViewDataSource
-    }
-
     private func setupNavigationBar() {
         title = "Characters"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -40,6 +35,7 @@ final class CharacterViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(tableView)
 
+        tableView.dataSource = tableViewDataSource
         tableView.delegate = self
         tableView.register(CharacterTableViewCell.self,
                            forCellReuseIdentifier: CharacterTableViewCell.id)
