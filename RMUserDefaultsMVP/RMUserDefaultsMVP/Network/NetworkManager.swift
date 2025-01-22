@@ -12,9 +12,12 @@ final class NetworkManager: NetworkManagerProtocol {
     var dataCounter = 1
     var imageCounter = 1
 
-    static let shared = NetworkManager()
-    private let storageManager = StorageManager()
+    private let storageManager: StorageManagerProtocol?
     private let urlString = "https://rickandmortyapi.com/api/character"
+
+    init(storageManager: StorageManagerProtocol) {
+        self.storageManager = storageManager
+    }
 
     func getCharacters(completion: @escaping (Result<[Character], Error>) -> Void) {
         guard let url = URL(string: urlString) else {
@@ -58,7 +61,7 @@ final class NetworkManager: NetworkManagerProtocol {
 
     func loadImage(from urlString: String, completion: @escaping (UIImage?) -> Void) {
 
-        if let imageData = storageManager.loadImage(key: urlString),
+        if let imageData = storageManager?.loadImage(key: urlString),
            let image = UIImage(data: imageData) {
             completion(image)
             return
@@ -80,7 +83,7 @@ final class NetworkManager: NetworkManagerProtocol {
 
             if let data,
                let image = UIImage(data: data) {
-                self.storageManager.saveImage(data, key: urlString)
+                self.storageManager?.saveImage(data, key: urlString)
                 DispatchQueue.main.async {
                     completion(image)
                     print("Load image \(self.imageCounter)")
