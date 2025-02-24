@@ -42,15 +42,11 @@ final class CharacterPresenter: CharacterPresenterProtocol {
 
             switch result {
             case .success(let characters):
-                DispatchQueue.main.async {
-                    self.characters = characters
-                    self.view?.updateCharacters(characters)
-                    self.storageManager.saveCharacters(characters)
-                }
+                self.characters = characters
+                self.view?.updateCharacters(characters)
+                self.storageManager.saveCharacters(characters)
             case .failure(let error):
-                DispatchQueue.main.async {
-                    self.view?.showError(error.localizedDescription)
-                }
+                self.view?.showError(error.localizedDescription)
             }
         }
     }

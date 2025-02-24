@@ -10,7 +10,7 @@ import UIKit
 
 final class CharacterTableViewDataSource: NSObject, UITableViewDataSource, CharacterDataSourceProtocol {
     var characters = [Character]()
-    var presenter: CharacterPresenterProtocol
+    private let presenter: CharacterPresenterProtocol
 
     init(presenter: CharacterPresenterProtocol) {
         self.presenter = presenter

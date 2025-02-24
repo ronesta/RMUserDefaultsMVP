@@ -24,7 +24,6 @@ final class CharacterAssembly {
 
         viewController.presenter = presenter
         viewController.tableViewDataSource = tableViewDataSource
-        tableViewDataSource.presenter = presenter
 
         let navigationController = UINavigationController(rootViewController: viewController)
         return navigationController
