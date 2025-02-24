@@ -15,7 +15,7 @@ final class CharacterPresenter: CharacterPresenterProtocol {
 
     private var characters = [Character]()
 
-    init(view: CharacterViewProtocol,
+    init(view: CharacterViewProtocol?,
          networkManager: NetworkManagerProtocol,
          storageManager: StorageManagerProtocol
     ) {
@@ -41,11 +41,11 @@ final class CharacterPresenter: CharacterPresenterProtocol {
             }
 
             switch result {
-            case .success(let character):
+            case .success(let characters):
                 DispatchQueue.main.async {
-                    self.characters = character
-                    self.view?.updateCharacters(self.characters)
-                    self.storageManager.saveCharacters(character)
+                    self.characters = characters
+                    self.view?.updateCharacters(characters)
+                    self.storageManager.saveCharacters(characters)
                 }
             case .failure(let error):
                 DispatchQueue.main.async {

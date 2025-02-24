@@ -21,17 +21,12 @@ final class StorageManager: StorageManagerProtocol {
     }
 
     func loadCharacters() -> [Character]? {
-        if let data = UserDefaults.standard.data(forKey: charactersKey) {
-            do {
-                let characters = try JSONDecoder().decode([Character].self, from: data)
-                return characters
-            } catch {
-                print("Failed to encode: \(error)")
-                return nil
-            }
-        } else {
+        guard let data = UserDefaults.standard.data(forKey: charactersKey),
+              let characters = try? JSONDecoder().decode([Character].self, from: data) else {
             return nil
         }
+
+        return characters
     }
 
     func clearCharacters() {
