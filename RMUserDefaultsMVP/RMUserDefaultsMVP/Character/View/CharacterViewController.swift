@@ -50,7 +50,6 @@ final class CharacterViewController: UIViewController {
 // MARK: - CharacterViewProtocol
 extension CharacterViewController: CharacterViewProtocol {
     func updateCharacters(_ characters: [Character]) {
-
         tableViewDataSource?.characters = characters
         tableView.reloadData()
     }
